@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>componenti/AndroidDelegate.qml</file>
+        <file>componenti/CustomTextInput.qml</file>
+        <file>componenti/CustomSwitch.qml</file>
+        <file>componenti/CustomLabel.qml</file>
+        <file>componenti/CustomButton.qml</file>
+    </qresource>
+</RCC>

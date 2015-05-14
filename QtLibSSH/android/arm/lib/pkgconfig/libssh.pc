@@ -1,0 +1,6 @@
+Name: libssh
+Description: The SSH Library
+Version: 0.6.5
+Libs: -L/home/pxpert/Documenti/Progetti/RemoteExecuter/QtLibSSH/android/arm/lib -lssh
+Cflags: -I/home/pxpert/Documenti/Progetti/RemoteExecuter/QtLibSSH/android/arm/include
+

@@ -1,0 +1,6 @@
+Name: libssh_threads
+Description: The SSH Library Thread Extension
+Version: 0.6.5
+Libs: -L/home/pxpert/Documenti/Progetti/RemoteExecuter/QtLibSSH/android/arm/lib -lssh_threads
+Cflags: -I/home/pxpert/Documenti/Progetti/RemoteExecuter/QtLibSSH/android/arm/include
+

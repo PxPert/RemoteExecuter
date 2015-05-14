@@ -1,0 +1,103 @@
+diff -rupN libssh-0.6.5.original/cmake/Modules/FindOpenSSL.cmake libssh-0.6.5/cmake/Modules/FindOpenSSL.cmake
+--- libssh-0.6.5.original/cmake/Modules/FindOpenSSL.cmake	2015-04-29 12:15:59.000000000 +0200
++++ libssh-0.6.5/cmake/Modules/FindOpenSSL.cmake	2015-05-10 14:41:51.741304457 +0200
+@@ -24,6 +24,14 @@
+ #=============================================================================
+ #
+ 
++if (OPENSSL_SSL_LIBRARIES AND OPENSSL_CRYPTO_LIBRARIES AND OPENSSL_INCLUDE_DIRS)
++	SET (OPENSSL_LIBRARIES
++		${OPENSSL_SSL_LIBRARIES}
++		${OPENSSL_CRYPTO_LIBRARIES}
++	)
++endif (OPENSSL_SSL_LIBRARIES AND OPENSSL_CRYPTO_LIBRARIES AND OPENSSL_INCLUDE_DIRS)
++
++
+ if (OPENSSL_LIBRARIES AND OPENSSL_INCLUDE_DIRS)
+     # in cache already
+     set(OPENSSL_FOUND TRUE)
+diff -rupN libssh-0.6.5.original/src/CMakeLists.txt libssh-0.6.5/src/CMakeLists.txt
+--- libssh-0.6.5.original/src/CMakeLists.txt	2015-04-29 12:15:59.000000000 +0200
++++ libssh-0.6.5/src/CMakeLists.txt	2015-05-10 15:01:55.307970202 +0200
+@@ -224,10 +224,6 @@ target_link_libraries(${LIBSSH_SHARED_LI
+ set_target_properties(
+   ${LIBSSH_SHARED_LIBRARY}
+     PROPERTIES
+-      VERSION
+-        ${LIBRARY_VERSION}
+-      SOVERSION
+-        ${LIBRARY_SOVERSION}
+       OUTPUT_NAME
+         ssh
+       DEFINE_SYMBOL
+diff -rupN libssh-0.6.5.original/src/misc.c libssh-0.6.5/src/misc.c
+--- libssh-0.6.5.original/src/misc.c	2015-04-23 11:12:36.000000000 +0200
++++ libssh-0.6.5/src/misc.c	2015-05-09 18:46:42.818970402 +0200
+@@ -212,6 +212,8 @@ char *ssh_get_user_home_dir(void) {
+   char buf[NSS_BUFLEN_PASSWD];
+   int rc;
+ 
++#ifndef __ANDROID__
++
+   rc = getpwuid_r(getuid(), &pwd, buf, NSS_BUFLEN_PASSWD, &pwdbuf);
+   if (rc != 0) {
+       szPath = getenv("HOME");
+@@ -225,7 +227,10 @@ char *ssh_get_user_home_dir(void) {
+   }
+ 
+   szPath = strdup(pwd.pw_dir);
+-
++#else
++  szPath = malloc(sizeof("/data"));
++  strcpy(szPath,"/data");
++#endif
+   return szPath;
+ }
+ 
+@@ -244,7 +249,7 @@ char *ssh_get_local_username(void) {
+     char buf[NSS_BUFLEN_PASSWD];
+     char *name;
+     int rc;
+-
++#ifndef __ANDROID__
+     rc = getpwuid_r(getuid(), &pwd, buf, NSS_BUFLEN_PASSWD, &pwdbuf);
+     if (rc != 0) {
+         return NULL;
+@@ -255,6 +260,10 @@ char *ssh_get_local_username(void) {
+     if (name == NULL) {
+         return NULL;
+     }
++#else
++    name = malloc(sizeof("local"));
++    strcpy(name,"local");
++#endif
+ 
+     return name;
+ }
+diff -rupN libssh-0.6.5.original/src/packet_cb.c libssh-0.6.5/src/packet_cb.c
+--- libssh-0.6.5.original/src/packet_cb.c	2015-04-30 13:27:34.000000000 +0200
++++ libssh-0.6.5/src/packet_cb.c	2015-05-09 18:46:42.818970402 +0200
+@@ -25,6 +25,10 @@
+ 
+ #include <stdlib.h>
+ 
++#ifdef __ANDROID__
++#include "sys/endian.h"
++#endif
++
+ #include "libssh/priv.h"
+ #include "libssh/buffer.h"
+ #include "libssh/crypto.h"
+diff -rupN libssh-0.6.5.original/src/poll.c libssh-0.6.5/src/poll.c
+--- libssh-0.6.5.original/src/poll.c	2015-04-29 12:15:59.000000000 +0200
++++ libssh-0.6.5/src/poll.c	2015-05-09 18:46:42.818970402 +0200
+@@ -37,8 +37,8 @@
+ #include "libssh/session.h"
+ #ifdef WITH_SERVER
+ #include "libssh/server.h"
+-#include "libssh/misc.h"
+ #endif
++#include "libssh/misc.h"
+ 
+ 
+ #ifndef SSH_POLL_CTX_CHUNK

@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/button_default.png</file>
+        <file>images/button_pressed.png</file>
+        <file>images/navigation_next_item.png</file>
+        <file>images/navigation_previous_item.png</file>
+        <file>images/tab_selected.png</file>
+        <file>images/tabs_standard.png</file>
+        <file>images/textinput.png</file>
+        <file>images/toolbar.png</file>
+        <file>images/ic_action_new.png</file>
+    </qresource>
+</RCC>
