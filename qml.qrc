@@ -4,7 +4,6 @@
         <file>SelettoreSSH.qml</file>
         <file>SelettoreSSHForm.ui.qml</file>
         <file>ModificaParametri.qml</file>
-        <file>ModificaParametriForm.ui.qml</file>
         <file>storage.js</file>
         <file>FinestraSSH.qml</file>
         <file>FinestraSSHForm.ui.qml</file>

@@ -5,12 +5,26 @@
 
 #include "QtLibSSH/sessionessh.h"
 #include <QtQml>
+#include <QTranslator>
 
 #include <QObject>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    QTranslator translator;
+    QString locale = QLocale::system().name();
+
+//    qDebug() << "LOCALE:" << locale;
+    if (! locale.contains("it_",Qt::CaseInsensitive))
+    {
+//        qDebug() << translator.load(QString(":/translations/remoteexecuter_default.ts"));
+
+        app.installTranslator(&translator);
+    }
+
 
     QQmlApplicationEngine engine;
     qRegisterMetaType<CodiceErrore>("CodiceErrore");

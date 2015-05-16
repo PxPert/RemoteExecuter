@@ -4,7 +4,7 @@ import org.pxpert.CodiceErrore 1.0
 
 Item {
     id: root
-    property string nomeFinestra: "Esegui comando"
+    property string nomeFinestra: qsTr("Esegui comando")
 
     function eseguiSSH(parametri) {
         form.modelLog.clear();
@@ -14,7 +14,7 @@ Item {
         stackView.aggiornaTitolo();
         // state = "activeState";
 
-        form.modelLog.append(creaElementoLista("Connessione al server " + parametri.indirizzoServer + "...", "white", false));
+        form.modelLog.append(creaElementoLista(qsTr("Connessione al server ") + parametri.indirizzoServer + "...", "white", false));
         var indirizzo = parametri.indirizzoServer;
         var porta = 22;
         var espressione = new RegExp("(.*):([\\d]+)");
@@ -29,33 +29,33 @@ Item {
 
         if (codiceErrore.codiceErrore == 0)
         {
-            form.modelLog.append(creaElementoLista("Connessione riuscita", "green", true));
+            form.modelLog.append(creaElementoLista(qsTr("Connessione riuscita"), "green", true));
 
-            form.modelLog.append(creaElementoLista("Autenticazione in corso...", "white", false));
+            form.modelLog.append(creaElementoLista(qsTr("Autenticazione in corso..."), "white", false));
             sessioneSSH.autenticaConPassword(parametri.username,parametri.password,codiceErrore);
 
             if (codiceErrore.codiceErrore == 0)
             {
-                form.modelLog.append(creaElementoLista("Autenticazione completata", "green", true));
+                form.modelLog.append(creaElementoLista(qsTr("Autenticazione completata"), "green", true));
 
                 var output = sessioneSSH.eseguiComando(parametri.comandoDaEseguire, parametri.pty, codiceErrore);
                 if (codiceErrore.codiceErrore == 0)
                 {
-                    form.modelLog.append(creaElementoLista("Esecuzione terminata", "green", true));
-                    form.modelLog.append(creaElementoLista("StdOut: ", "green", false));
+                    form.modelLog.append(creaElementoLista(qsTr("Esecuzione terminata"), "green", true));
+                    form.modelLog.append(creaElementoLista(qsTr("StdOut: "), "green", false));
                     form.modelLog.append(creaElementoLista(output.output, "green", false));
-                    form.modelLog.append(creaElementoLista("StdErr: ", "green", false));
+                    form.modelLog.append(creaElementoLista(qsTr("StdErr: "), "green", false));
                     form.modelLog.append(creaElementoLista(output.error, "green", false));
                 } else {
-                    form.modelLog.append(creaElementoLista("Esecuzione fallita: " + codiceErrore.testoErrore, "red", true));
+                    form.modelLog.append(creaElementoLista(qsTr("Esecuzione fallita: ") + codiceErrore.testoErrore, "red", true));
                 }
 
             } else {
-                form.modelLog.append(creaElementoLista("Connessione fallita: " + codiceErrore.testoErrore, "red", true));
+                form.modelLog.append(creaElementoLista(qsTr("Connessione fallita: ") + codiceErrore.testoErrore, "red", true));
             }
 
         } else {
-            form.modelLog.append(creaElementoLista("Connessione fallita: " + codiceErrore.testoErrore, "red", true));
+            form.modelLog.append(creaElementoLista(qsTr("Connessione fallita: ") + codiceErrore.testoErrore, "red", true));
         }
 
         sessioneSSH.disconnettiSessione(codiceErrore);

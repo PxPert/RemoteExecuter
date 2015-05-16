@@ -58,7 +58,7 @@ ApplicationWindow {
             x: backButton.x + backButton.width + 20
             anchors.verticalCenter: parent.verticalCenter
             color: "white"
-            text: "Widget Gallery"
+            text: qsTr("Remote Executer")
         }
 
         Rectangle {
@@ -139,9 +139,8 @@ ApplicationWindow {
         }
 
 
-
         initialItem: SelettoreSSH {
-            property string nomeFinestra: "Remote Executer"
+            property string nomeFinestra: qsTr("Remote Executer")
             property string toolButtonImage: "images/ic_action_new.png"
 
             
@@ -149,7 +148,7 @@ ApplicationWindow {
 
                 id: menuGenerico
                 MenuItem {
-                        text: "Nuova sessione"
+                        text: qsTr("Nuova sessione")
                         onTriggered: selettoreSSH.eseguiAggiungiSessione();
                 }
                 MenuSeparator {
@@ -250,7 +249,7 @@ ApplicationWindow {
         id: confermaCancellazione
         property int indice;
         property string nome;
-        title: "Elimina comando";
+        title: qsTr("Elimina comando");
 
         standardButtons: StandardButton.Yes | StandardButton.No
         onYes: {
@@ -269,7 +268,7 @@ ApplicationWindow {
         }
         */
         function show() {
-            confermaCancellazione.text = "Eliminare " + nome + "?";
+            confermaCancellazione.text = qsTr("Eliminare ") + nome + "?";
             confermaCancellazione.open();
         }
     }
@@ -296,7 +295,7 @@ ApplicationWindow {
         }
 
         function show() {
-            confermaEsecuzione.text = "Eseguire " + nome + "?";
+            confermaEsecuzione.text = qsTr("Eseguire ") + nome + "?";
             confermaEsecuzione.open();
         }
     }

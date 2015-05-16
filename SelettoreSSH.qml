@@ -69,7 +69,7 @@ Item {
         Menu {
             id: menuContesto
             MenuItem {
-                    text: "Nuova sessione"
+                    text: qsTr("Nuova sessione")
                     onTriggered: root.aggiungiSessione();
             }
             MenuSeparator {
@@ -77,11 +77,11 @@ Item {
             }
 
             MenuItem {
-                text: "Modifica sessione"
+                text: qsTr("Modifica sessione")
                 onTriggered: root.modificaSessione(form.lvServers.currentIndex);
             }
             MenuItem {
-                text: "Elimina sessione"
+                text: qsTr("Elimina sessione")
                 onTriggered: root.eliminaSessione(form.lvServers.currentIndex);
             }
         }
