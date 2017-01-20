@@ -1,10 +1,10 @@
 import QtQuick 2.4
-import QtQuick.Controls 1.3
-import QtQuick.Window 2.2
+import QtQuick.Controls 1.4
+import QtQuick.Window 2.0
 import QtQuick.Dialogs 1.2
 import "componenti"
 import "storage.js" as Storage
-
+import "qrc:/componenti/Utility.js" as Utility
 
 ApplicationWindow {
     title: qsTr("Remote Executer")
@@ -21,25 +21,27 @@ ApplicationWindow {
         border.bottom: 8
         source: "images/toolbar.png"
         width: parent.width
-        height: 100
+        // height: (titoloApplicazione.height * 1.5) > 60 ? (titoloApplicazione.height * 1.5) : 60
+        height: Utility.calcolaAltezza(64,Screen.pixelDensity,titoloApplicazione.height * 1.5)
+
+        // height: titoloApplicazione.height * 1.3
 
         Rectangle {
             id: backButton
-            width: opacity ? 60 : 0
+            height: parent.height * 0.8
+            width: opacity ? parent.height : 0
+
             anchors.left: parent.left
             anchors.leftMargin: 20
             opacity: stackView.depth > 1 ? 1 : 0
             anchors.verticalCenter: parent.verticalCenter
             antialiasing: true
-            height: 60
             radius: 4
             color: backmouse.pressed ? "#222" : "transparent"
             Behavior on opacity { NumberAnimation{} }
             Image {
-                width: 48
-                height: 48
-                x: 6
-                y: 6
+                width: height
+                height: parent.height
                 anchors.verticalCenter: parent.verticalCenter
                 source: "images/navigation_previous_item.png"
             }
@@ -53,7 +55,7 @@ ApplicationWindow {
 
         Text {
             id: titoloApplicazione
-            font.pixelSize: 42
+            font.pointSize: 22
             Behavior on x { NumberAnimation{ easing.type: Easing.OutCubic} }
             x: backButton.x + backButton.width + 20
             anchors.verticalCenter: parent.verticalCenter
@@ -63,7 +65,8 @@ ApplicationWindow {
 
         Rectangle {
             id: optionButton
-            width: opacity ? 60 : 0
+            height: parent.height * 0.8
+            width: opacity ? parent.height : 0
             anchors.right: parent.right
             anchors.rightMargin: 20
 
@@ -72,16 +75,16 @@ ApplicationWindow {
             // opacity: stackView.depth > 1 ? 1 : 0
             anchors.verticalCenter: parent.verticalCenter
             antialiasing: true
-            height: 60
             radius: 4
             color: optionmouse.pressed ? "#222" : "transparent"
             Behavior on opacity { NumberAnimation{} }
             Image {
-                width: 48
-                height: 48
-                x: 6
-                y: 6
+                width: height
+                height: parent.height
+                // x: 6
+                // y: 6
                 anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
                 property string immagine: (stackView.currentItem === null || stackView.currentItem.toolButtonImage === undefined || stackView.currentItem.toolButtonImage === null || stackView.currentItem.toolButtonImage === "")?"":stackView.currentItem.toolButtonImage
                 onImmagineChanged: {
                     if (immagine != "")
@@ -277,7 +280,7 @@ ApplicationWindow {
         id: confermaEsecuzione
         property int indice;
         property string nome;
-        title: "Esegui comando";
+        title: qsTr("Esegui comando");
 /*
         Keys.onReleased:  {
             console.log("CHIAVE!!!")

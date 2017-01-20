@@ -37,17 +37,21 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
+import "Utility.js" as Utility
 
 
 
 
 import QtQuick 2.2
+import QtQuick.Window 2.0
 
 Item {
+    // Component.onCompleted: console.log("testing: "  + Screen.pixelDensity)
+
     id: root
     width: parent.width
-    height: 88
+    // height: (textitem.height + 16) > 100 ? (textitem.height + 16) : 100
+    height: Utility.calcolaAltezza(80,Screen.pixelDensity,textitem.height + 16)
 
     property alias text: textitem.text
     property alias mostraNavigationImage : navigationImage.visible
@@ -64,7 +68,8 @@ Item {
     Text {
         id: textitem
         color: "white"
-        font.pixelSize: 32
+        font.pointSize: 20
+
         text: modelData
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
@@ -76,13 +81,17 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: 15
+        // anchors.margins: 15
+        anchors.leftMargin: 15
+        anchors.rightMargin: 15
         height: 1
         color: "#424246"
     }
 
     Image {
         id: navigationImage
+        height: textitem.height
+        fillMode: Image.PreserveAspectFit
         anchors.right: parent.right
         anchors.rightMargin: 20
         anchors.verticalCenter: parent.verticalCenter

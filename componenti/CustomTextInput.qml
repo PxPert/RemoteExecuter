@@ -8,10 +8,10 @@ TextField {
     style: TextFieldStyle {
         textColor: "white"
         placeholderTextColor: "grey"
-        font.pixelSize: 28
+        font.pointSize: 18
         background: Item {
-            implicitHeight: 50
-            implicitWidth: 320
+
+            // implicitWidth: 320
             BorderImage {
                 source: "../images/textinput.png"
                 border.left: 8

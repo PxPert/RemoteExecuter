@@ -1,7 +1,7 @@
 import QtQuick 2.4
-import QtQuick.Controls 1.2
-import QtQuick.Controls.Styles 1.2
-import QtQuick.Layouts 1.0
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
+import QtQuick.Layouts 1.1
 
 import "storage.js" as Storage
 import "componenti"
@@ -22,6 +22,7 @@ Item {
     Item {
         id: form
         anchors.fill: parent
+        anchors.margins: 10
 
         property alias nome : txNomeComando.text
         property alias indirizzoServer: txIndirizzoServer.text
@@ -153,7 +154,9 @@ Item {
 
         Flickable {
             id: fkContenitoreGriglia
-            contentHeight: parent.height > 400?parent.height:400
+            // contentHeight: parent.height > 400?parent.height:400
+
+            contentHeight: layoutContenitore.height + layoutContenitore.spacing
             interactive: true
             flickableDirection: Flickable.VerticalFlick
             anchors.bottom: row1.top
@@ -170,8 +173,14 @@ Item {
                 anchors.rightMargin: 8
                 anchors.leftMargin: 8
                 anchors.bottomMargin: 8
-                anchors.topMargin: 8
-                anchors.fill: parent
+                anchors.topMargin: txNomeComando.height / 4
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                spacing: txNomeComando.height / 2
+
+                // anchors.fill: parent
+
 
 
                 CustomTextInput {

@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 //    qDebug() << "LOCALE:" << locale;
     if (! locale.contains("it_",Qt::CaseInsensitive))
     {
-//        qDebug() << translator.load(QString(":/translations/remoteexecuter_default.ts"));
+        translator.load(QString(":/translations/remoteexecuter_default.ts"));
 
         app.installTranslator(&translator);
     }

@@ -5,5 +5,6 @@
         <file>componenti/CustomSwitch.qml</file>
         <file>componenti/CustomLabel.qml</file>
         <file>componenti/CustomButton.qml</file>
+        <file>componenti/Utility.js</file>
     </qresource>
 </RCC>

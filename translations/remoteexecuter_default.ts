@@ -31,7 +31,7 @@
     <message>
         <location filename="../FinestraSSH.qml" line="44"/>
         <source>Esecuzione terminata</source>
-        <translation>Command execited</translation>
+        <translation>Command executed</translation>
     </message>
     <message>
         <location filename="../FinestraSSH.qml" line="45"/>
@@ -165,6 +165,11 @@
         <location filename="../main.qml" line="271"/>
         <source>Eliminare </source>
         <translation>Really delete </translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="280"/>
+        <source>Esegui comando</source>
+        <translation>Start Command</translation>
     </message>
     <message>
         <location filename="../main.qml" line="298"/>

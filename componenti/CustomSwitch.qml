@@ -4,14 +4,15 @@ import QtQuick.Controls.Styles 1.2
 
 Item {
     id: item1
-    implicitHeight: 50
-    implicitWidth: 152 + lbDescrizione.implicitWidth
+    implicitHeight: lbDescrizione.height
+    // implicitWidth: gvSwitch.width + lbDescrizione.implicitWidth + 8
     property alias text: lbDescrizione.text
     property alias checked: componente.checked
 
     CustomLabel {
         id: lbDescrizione
         anchors.left: parent.left
+        anchors.leftMargin: 8
         anchors.verticalCenter: parent.verticalCenter
     }
 
@@ -19,23 +20,26 @@ Item {
         id: componente
         anchors.right: parent.right
         anchors.top: parent.top
+        anchors.rightMargin: 8
         style:  SwitchStyle {
 
 
             groove: Rectangle {
-                implicitHeight: 50
-                implicitWidth: 152
+                id: gvSwitch
+                implicitHeight: lbDescrizione.height
+                implicitWidth: (txSwitchOn.width > txSwitchOff.width)? (txSwitchOn.width * 2.4) :(txSwitchOff.width * 2.4)
                 Rectangle {
                     anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.bottom: parent.bottom
                     width: parent.width/2 - 2
-                    height: 20
+                    // height: 20
                     anchors.margins: 2
                     color: control.checked ? "#468bb7" : "#222"
                     Behavior on color {ColorAnimation {}}
                     Text {
-                        font.pixelSize: 23
+                        id: txSwitchOn
+                        font.pixelSize: lbDescrizione.height * 0.8
                         color: "white"
                         anchors.centerIn: parent
                         text: "ON"
@@ -46,7 +50,8 @@ Item {
                     height: parent.height
                     anchors.right: parent.right
                     Text {
-                        font.pixelSize: 23
+                        id: txSwitchOff
+                        font.pixelSize: lbDescrizione.height * 0.8
                         color: "white"
                         anchors.centerIn: parent
                         text: "OFF"

@@ -3,6 +3,6 @@ import QtQuick.Controls 1.2
 
 Label {
     color: "white"
-    font.pixelSize: 28
+    font.pointSize: 18
 }
 

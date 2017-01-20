@@ -1,11 +1,12 @@
-prefix=/docs/Documenti/Progetti/RemoteExecuter/QtLibSSH/tmp/openssl-1.0.1m/../../android/arm
+prefix=/home/pxpert/Documenti/Progetti/RemoteExecuter/QtLibSSH/tmp/openssl-1.0.2j/../../android/arm
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
+enginesdir=${libdir}/engines
 
 Name: OpenSSL-libcrypto
 Description: OpenSSL cryptography library
-Version: 1.0.1m
+Version: 1.0.2j
 Requires: 
 Libs: -L${libdir} -lcrypto
 Libs.private: -ldl

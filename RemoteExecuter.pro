@@ -9,6 +9,7 @@ lupdate_only{
 SOURCES = *.qml \
           *.js
 }
+
 TRANSLATIONS += translations/remoteexecuter_default.ts
 
 RESOURCES += qml.qrc \
